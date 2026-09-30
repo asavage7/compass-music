@@ -22,6 +22,7 @@ import time
 import urllib.error
 import urllib.request
 from collections import deque
+from typing import Any, cast
 
 from core.config import get_data_dir
 from core.database import Track, TrackFeatures
@@ -151,7 +152,7 @@ def _ensure_librosa():
         localscore = np.zeros_like(onset_envelope)
 
         if len(frames_per_beat) != 1:
-            # Dynamic-tempo path: not exercised by finload, keep it correct.
+            # Dynamic-tempo path: not exercised by Compass, keep it correct.
             for i in range(N):
                 fpb_i = frames_per_beat[i]
                 window = np.exp(-0.5 * (np.arange(-fpb_i, fpb_i + 1) * 32.0 / fpb_i) ** 2)
@@ -292,7 +293,7 @@ def _analyze(path: str) -> dict:
         y, sr = librosa.load(path, sr=SR, mono=True)
         if y.size == 0:
             raise ValueError("empty audio")
-        y = _windowed_clip(librosa, np, y, sr)
+        y = _windowed_clip(librosa, np, y, int(sr))
     if y.size == 0:
         raise ValueError("empty audio")
 
@@ -305,7 +306,7 @@ def _analyze(path: str) -> dict:
     # aggregate=np.median matches beat_track's own non-default internal call.
     onset_env = librosa.onset.onset_strength(S=mel_db, sr=sr, hop_length=HOP, aggregate=np.median)
     tempo = librosa.feature.rhythm.tempo(onset_envelope=onset_env, sr=sr, hop_length=HOP)
-    bpm = _refine_tempo(librosa, np, onset_env, sr, float(np.atleast_1d(tempo)[0]))
+    bpm = _refine_tempo(librosa, np, onset_env, int(sr), float(np.atleast_1d(tempo)[0]))
 
     mfcc = librosa.feature.mfcc(S=mel_db, n_mfcc=N_MFCC)
     contrast = librosa.feature.spectral_contrast(S=stft_mag, sr=sr, n_fft=N_FFT, hop_length=HOP)
@@ -338,8 +339,10 @@ def _worker_init(cpu_fraction: float):
     _cpu_fraction = cpu_fraction
 
     try:
-        os.nice(15)  # POSIX only; deprioritize so foreground apps win any contention
-    except (AttributeError, OSError):
+        nice = getattr(os, "nice", None)
+        if nice is not None:
+            nice(15)  # POSIX only; deprioritize so foreground apps win any contention
+    except OSError:
         pass
 
     # By defualt, BLAS threads are unbounded and can saturate all cores, so limit them to 1.
@@ -353,7 +356,7 @@ def _worker_init(cpu_fraction: float):
     except Exception:
         pass
 
-def _analyze_one(track_id_and_path: tuple[str, str]) -> tuple[str, dict | None, str | None]:
+def _analyze_one(track_id_and_path: tuple[str, str]) -> tuple[str, dict[str, object] | None, str | None]:
     """Pool worker: analyze one track and return (track_id, features, error)."""
     track_id, path = track_id_and_path
     try:
@@ -482,7 +485,7 @@ def compute_hubness_stats(db_manager) -> int:
     if len(rows) < 2:
         return 0
 
-    track_ids = [r.track_id for r in rows]
+    track_ids = [r.track for r in rows]
     vectors = np.array([_feature_vector(json.loads(r.features)) for r in rows])
     std = vectors.std(axis=0)
     std[std < 1e-12] = 1.0
@@ -621,7 +624,7 @@ class AudioFeatureManager(BackgroundJob):
                     if error:
                         errors += 1
                     else:
-                        self.db.save_track_features(track_id, **features)
+                        self.db.save_track_features(track_id, **cast(dict[str, Any], features))
                     self._emit(processed=processed,
                                message=f"Analyzing audio: {processed}/{len(tracks)}"
                                        + (f" ({errors} failed)" if errors else ""))

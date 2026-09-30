@@ -451,14 +451,19 @@
     slot="toolbar"
     class="flex items-center justify-between w-full bg-zinc-900 border-b border-white/10 p-2 z-7000"
   >
-    <div class="flex items-center">
+    <div class="flex items-center gap-2">
       <IconButton on:click={() => loadData(activeTab, true)} aria-label="Refresh library">
         <IconRefresh size={16} />
       </IconButton>
+      {#if activeTab === "Playlists"}
+        <IconButton text md on:click={() => (showCreationModal = true)}>
+          <IconPlus size={16} /> <span class="hidden md:inline text-sm">New</span>
+        </IconButton>
+      {/if}
     </div>
 
     <div
-      class="absolute left-1/2 -translate-x-1/2 flex items-center bg-white/5 rounded-full"
+      class="sm:absolute sm:left-1/2 sm:-translate-x-1/2 flex items-center bg-white/5 rounded-full"
     >
       {#each tabs as tab, i}
         <button
@@ -470,18 +475,14 @@
         >
           <div class="flex items-center gap-2">
             <svelte:component this={tabicons[i]} size={16} />
-            {tab}
+            <span class="hidden md:inline">{tab}</span>
           </div>
         </button>
       {/each}
     </div>
 
     <div class="flex items-center gap-2">
-      {#if activeTab === "Playlists"}
-        <IconButton text on:click={() => (showCreationModal = true)}>
-          <IconPlus size={16} /> <span>New</span>
-        </IconButton>
-      {/if}
+      
       <ContextMenu
         items={buildSortMenuItems(
           activeTab,

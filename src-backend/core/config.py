@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 import sys
 import uuid
 from pathlib import Path
@@ -8,9 +9,34 @@ from platformdirs import user_data_dir
 from dotenv import load_dotenv
 
 # User agent identifiers. Version is automatically set from scripts/set-version.mjs
-APP_NAME = "Finload"
+APP_NAME = "Compass Music"
 APP_VERSION = "0.2.1"
 USER_AGENT = f"{APP_NAME.lower()}/{APP_VERSION}"
+
+
+def _migrate_legacy_data_dir() -> Path:
+    """Adopt the old data directory before any new database is opened."""
+    current = Path(user_data_dir("compass-music", appauthor=False))
+    legacy = Path(user_data_dir("finload"))
+
+    if current.exists() or not legacy.exists():
+        return current
+
+    try:
+        current.parent.mkdir(parents=True, exist_ok=True)
+        legacy.replace(current)
+    except OSError as exc:
+        # A copy fallback handles filesystems where rename cannot move the
+        # directory. Keep the legacy directory if copying is incomplete.
+        try:
+            shutil.copytree(legacy, current, dirs_exist_ok=True)
+        except OSError as copy_exc:
+            print(
+                f"[migration] could not move {legacy} to {current}: "
+                f"{exc}; copy failed: {copy_exc}"
+            )
+            return legacy
+    return current
 
 
 def _split_csv(value: str | None, default: list[str]) -> list[str]:
@@ -43,6 +69,7 @@ def get_cors_origins() -> list[str]:
 def get_data_dir() -> Path:
     override = (
         os.getenv("DATA_DIR", "").strip()
+        or os.getenv("COMPASS_DATA_DIR", "").strip()
         or os.getenv("FINLOAD_DATA_DIR", "").strip()
         or os.getenv("DATABASE_PATH", "").strip()
     )
@@ -53,7 +80,7 @@ def get_data_dir() -> Path:
             return path.parent
         return path
 
-    return Path(user_data_dir("finload"))
+    return _migrate_legacy_data_dir()
 
 
 _device_id = ""
@@ -71,7 +98,10 @@ def get_device_id() -> str:
     if _device_id:
         return _device_id
 
-    _device_id = os.getenv("FINLOAD_DEVICE_ID", "").strip()
+    _device_id = (
+        os.getenv("COMPASS_DEVICE_ID", "").strip()
+        or os.getenv("FINLOAD_DEVICE_ID", "").strip()
+    )
     if _device_id:
         return _device_id
 

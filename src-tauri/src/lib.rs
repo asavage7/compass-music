@@ -130,7 +130,7 @@ pub fn run() {
     // disabling that renderer would, only XWayland's overhead and Wayland
     // niceties like per-monitor fractional scaling.
     //
-    // Set only when unset, so `GDK_BACKEND=wayland finload` still forces the
+    // Set only when unset, so `GDK_BACKEND=wayland compass-music` still forces the
     // native path for anyone who wants it.
     #[cfg(target_os = "linux")]
     if std::env::var_os("GDK_BACKEND").is_none() {
@@ -201,9 +201,9 @@ pub fn run() {
             // terminal-launched dev run still shows its output directly.
             let mut backend_cmd = std::process::Command::new(&backend_exe);
 
-            // python-backend.exe is a console-subsystem binary (finload.spec
+            // python-backend.exe is a console-subsystem binary (compass-music.spec
             // builds it with console=True, so its own stdio-inherited output is
-            // visible when launched from a terminal). Spawned from finload.exe --
+            // visible when launched from a terminal). Spawned from compass-music.exe --
             // a GUI-subsystem process with no console of its own -- Windows would
             // otherwise allocate a brand new console window for it, which flashes
             // up behind the app on every launch. CREATE_NO_WINDOW suppresses that
@@ -253,8 +253,8 @@ pub fn run() {
                 }
             };
             let media_config = souvlaki::PlatformConfig {
-                dbus_name: "com.finload.Finload",
-                display_name: "Finload",
+                dbus_name: "com.asavage7.compass-music",
+                display_name: "Compass Music",
                 hwnd,
             };
             match souvlaki::MediaControls::new(media_config) {

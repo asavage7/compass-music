@@ -80,13 +80,13 @@ jobs:
           src-backend/.venv/bin/pip install -r src-backend/requirements.txt
 
       # deb and rpm declare libmpv2 / libmpv.so.2()(64bit) as a package
-      # dependency, so FINLOAD_TRIM_MPV=1 strips the ~170MB of bundled GUI/codec
+      # dependency, so COMPASS_TRIM_MPV=1 strips the ~170MB of bundled GUI/codec
       # closure and lets them use the system library. The npm script sets it.
       - name: Build deb and rpm
         run: npm run build:linux-installers
 
       # The AppImage has to run where no libmpv is installed at all, so it keeps
-      # the full closure — FINLOAD_TRIM_MPV must stay unset here. build.rs
+      # the full closure — COMPASS_TRIM_MPV must stay unset here. build.rs
       # declares rerun-if-env-changed on it, so dropping the variable re-runs
       # PyInstaller and rebuilds the sidecar untrimmed.
       - name: Build AppImage
@@ -125,7 +125,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: finload-linux-${{ steps.version.outputs.version }}
+          name: compass-music-linux-${{ steps.version.outputs.version }}
           path: dist/*
           retention-days: 14
 
@@ -147,23 +147,23 @@ jobs:
 
             **Debian / Ubuntu** (2024 or newer)
             ```
-            sudo apt install ./finload_${{ steps.version.outputs.version }}_amd64.deb
+            sudo apt install ./compass-music_${{ steps.version.outputs.version }}_amd64.deb
             ```
 
             **Fedora / openSUSE**
             ```
-            sudo dnf install ./finload-${{ steps.version.outputs.version }}-1.x86_64.rpm
+            sudo dnf install ./compass-music_${{ steps.version.outputs.version }}-1.x86_64.rpm
             ```
 
             **Appimage**
             ```
-            chmod +x finload_${{ steps.version.outputs.version }}_amd64.AppImage
-            ./finload_${{ steps.version.outputs.version }}_amd64.AppImage
+            chmod +x compass-music_${{ steps.version.outputs.version }}_amd64.AppImage
+            ./compass-music_${{ steps.version.outputs.version }}_amd64.AppImage
             ```
 
             **Windows**
 
-            Run the installer: `finload_${{ steps.version.outputs.version }}_x64-setup.exe` (or the `.msi` if you prefer MSI-managed installs).
+            Run the installer: `compass-music_${{ steps.version.outputs.version }}_x64-setup.exe` (or the `.msi` if you prefer MSI-managed installs).
 
   windows:
     name: Windows bundles
@@ -247,7 +247,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: finload-windows-${{ steps.version.outputs.version }}
+          name: compass-music-windows-${{ steps.version.outputs.version }}
           path: dist/*
           retention-days: 14
 
@@ -269,20 +269,20 @@ jobs:
 
             **Debian / Ubuntu** (2024 or newer)
             ```
-            sudo apt install ./finload_${{ steps.version.outputs.version }}_amd64.deb
+            sudo apt install ./compass-music_${{ steps.version.outputs.version }}_amd64.deb
             ```
 
             **Fedora / openSUSE**
             ```
-            sudo dnf install ./finload-${{ steps.version.outputs.version }}-1.x86_64.rpm
+            sudo dnf install ./compass-music_${{ steps.version.outputs.version }}-1.x86_64.rpm
             ```
 
             **Appimage**
             ```
-            chmod +x finload_${{ steps.version.outputs.version }}_amd64.AppImage
-            ./finload_${{ steps.version.outputs.version }}_amd64.AppImage
+            chmod +x compass-music_${{ steps.version.outputs.version }}_amd64.AppImage
+            ./compass-music_${{ steps.version.outputs.version }}_amd64.AppImage
             ```
 
             **Windows**
 
-            Run the installer: `finload_${{ steps.version.outputs.version }}_x64-setup.exe` (or the `.msi` if you prefer MSI-managed installs).
+            Run the installer: `compass-music_${{ steps.version.outputs.version }}_x64-setup.exe` (or the `.msi` if you prefer MSI-managed installs).

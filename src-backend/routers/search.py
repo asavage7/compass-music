@@ -23,12 +23,12 @@ def _normalize(text: str) -> str:
 # Expose the exact same normalisation to SQL, so candidate filtering and Python
 # scoring agree byte-for-byte. (Applies to the live connection and is re-applied
 # to any future ones.)
-peewee_db.register_function(_normalize, "finload_normalize", 1)
+peewee_db.register_function(_normalize, "compass_normalize", 1)
 
 
 def _normalized_field(field):
     """SQL counterpart of _normalize, via the registered SQLite function."""
-    return fn.finload_normalize(field)
+    return fn.compass_normalize(field)
 
 
 def _search_score(text: str, q: str, tokens: list[str]) -> int:

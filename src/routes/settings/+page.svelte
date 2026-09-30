@@ -337,7 +337,7 @@
     const confirmed = await showConfirm({
       title: "Re-run setup?",
       message:
-        "Finload will restart into the setup wizard. Your current settings will be saved.",
+        "Compass will restart into the setup wizard. Your current settings will be saved.",
       confirmLabel: "Restart",
     });
     if (!confirmed) return;
@@ -397,7 +397,7 @@
   >
     <BackButton />
     <span class="text-sm font-semibold text-white">Settings</span>
-    <IconButton white aria-label="About Finload">
+    <IconButton white aria-label="About Compass Music">
       <IconInfoCircle size={16} />
     </IconButton>
   </div>

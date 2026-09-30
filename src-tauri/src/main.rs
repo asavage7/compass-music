@@ -4,5 +4,5 @@
 fn main() {
     std::env::set_var("WEBKIT_DISABLE_COMPOSITING_MODE", "0");
 
-    finload_lib::run();
+    compass_lib::run();
 }

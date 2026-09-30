@@ -10,7 +10,7 @@ fn find_mpv_dll(target: &str) -> Option<String> {
 
     // The vendored windows lib is authorative.
     //
-    // Must be absolute: finload.spec resolves a relative binary path against
+    // Must be absolute: compass-music.spec resolves a relative binary path against
     // its own directory (src-backend/), not against build.rs's cwd
     // (src-tauri/), so a relative path here silently looks in the wrong tree.
     let vendored = Path::new("binaries/vendor/mpv/libmpv-2.dll");
@@ -76,7 +76,7 @@ fn main() {
         fs::create_dir_all(out_dir).unwrap();
     }
 
-    println!("cargo:rerun-if-env-changed=FINLOAD_TRIM_MPV");
+    println!("cargo:rerun-if-env-changed=COMPASS_TRIM_MPV");
     // Without these, the "rerun-if-env-changed" directive above is the *only*
     // rerun trigger Cargo knows about, so it caches build.rs's output and
     // silently skips re-running it -- meaning a Python-only edit doesn't
@@ -89,7 +89,7 @@ fn main() {
         "routers",
         "services",
         "main.py",
-        "finload.spec",
+        "compass-music.spec",
         "requirements.txt",
     ] {
         println!("cargo:rerun-if-changed=../src-backend/{entry}");
@@ -114,21 +114,21 @@ fn main() {
             "--distpath",
             "binaries",
             "--noconfirm",
-            "../src-backend/finload.spec",
+            "../src-backend/compass-music.spec",
         ])
-        .env("FINLOAD_BINARY_NAME", &binary_name);
+        .env("COMPASS_BINARY_NAME", &binary_name);
 
         // By default the sidecar bundles libmpv's full GUI/codec dependency
         // closure, since that's the only variant that works everywhere,
         // including portable targets like AppImage that must run on systems
         // with no libmpv installed at all. deb/rpm builds declare libmpv2 as
         // a package dependency (see tauri.conf.json), so they don't need the
-        // bundled copy; set FINLOAD_TRIM_MPV when building just those targets
+        // bundled copy; set COMPASS_TRIM_MPV when building just those targets
         // to strip it and rely on the system's libmpv.so.2 instead — see
-        // finload.spec for the stripping logic. Never set it for a build that
+        // compass-music.spec for the stripping logic. Never set it for a build that
         // also produces an AppImage in the same invocation.
-        if let Ok(trim) = env::var("FINLOAD_TRIM_MPV") {
-            cmd.env("FINLOAD_TRIM_MPV", trim);
+        if let Ok(trim) = env::var("COMPASS_TRIM_MPV") {
+            cmd.env("COMPASS_TRIM_MPV", trim);
         }
 
         // On Windows, find and bundle mpv-2.dll (required by python-mpv at runtime).
@@ -136,7 +136,7 @@ fn main() {
             match find_mpv_dll(&target) {
                 Some(dll_path) => {
                     println!("cargo:warning=Bundling mpv-2.dll from: {}", dll_path);
-                    cmd.env("FINLOAD_MPV_DLL", &dll_path);
+                    cmd.env("COMPASS_MPV_DLL", &dll_path);
                 }
                 None => {
                     println!("cargo:warning=mpv-2.dll not found — audio will not work in the bundled app.");

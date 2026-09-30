@@ -81,7 +81,7 @@ function handleMediaControlEvent(event: MediaControlEventPayload): void {
     }
 }
 
-// Bridges Finload's playback state to the OS media session (MPRIS/SMTC/Now
+// Bridges Compass's playback state to the OS media session (MPRIS/SMTC/Now
 // Playing) via the Rust/souvlaki layer. Returns a cleanup function.
 export function initMediaSession(): () => void {
     if (!isTauri()) return () => {};

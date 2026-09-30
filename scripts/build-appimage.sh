@@ -6,7 +6,7 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-internal="$root/src-tauri/target/release/bundle/appimage/finload.AppDir/usr/lib/finload/backend/_internal"
+internal="$root/src-tauri/target/release/bundle/appimage/compass-music.AppDir/usr/lib/compass-music/backend/_internal"
 
 # Add a directory here if a new dependency starts vendoring its own libraries
 vendored=("$internal" "$internal/pillow.libs" "$internal/numpy.libs" "$internal/scipy.libs")

@@ -1,6 +1,6 @@
 """Shared base class for background jobs.
 
-A job in finload is an asynchronous task that runs in a background thread.
+A job in Compass is an asynchronous task that runs in a background thread.
 All jobs track their own progress and can be observed live via a websocket.
 """
 import logging

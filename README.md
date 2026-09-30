@@ -1,16 +1,14 @@
-<img src="docs/banner.png" alt="Finload logo, an outline of a shark fin with a waveform in the background." height="80">
+<img src="docs/banner.png" alt="Compass music banner, consisting of a circular compass with an audio waveform in the background, app name in large text, and below the name a tagline: Re-discover your personal taste." height="83"><br/>
 
 [![CI](https://github.com/asavage7/finload/actions/workflows/ci.yml/badge.svg)](https://github.com/asavage7/finload/actions/workflows/ci.yml)
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
 [![GitHub Sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/asavage7)
 
+Compass (previously Finload) is a unique self-hosted music client, with a custom discovery algorithm built to let you re-live your library.
 
-Finload is a unique Jellyfin/Local music client, with a custom discovery algorithm built to let you re-live your library.
-
-**Finload is currently in beta. Give it a shot! If you run into problems, feel free to [open an issue](https://github.com/asavage7/finload/issues).**
+**The app is currently in beta. Give it a shot! If you run into problems, feel free to [open an issue](https://github.com/asavage7/finload/issues).**
 
 Current known issues can be found in [ISSUES.md](ISSUES.md).
-
 
 ## Screenshots
 
@@ -21,23 +19,23 @@ Current known issues can be found in [ISSUES.md](ISSUES.md).
 
 ![Home page showing recommendation rows and the lyrics panel](docs/app3.png)
 
-## Why Finload?
+## Why Compass?
 
-Finload is a next-gen client built around music discovery. Sync your library, and Finload automatically builds a custom experience around your tastes.
+Compass is a next-gen music experience built around discovery. Sync your library, and Compass automatically builds a custom experience around your tastes.
 - Get custom recommendations based on your listening history.
 - Start radio from an Artist/Album and get songs that *feel* similar, not just share the same genre.
 - Turn on Autoplay and keep the music going forever. Autoplay queues up 3 songs at a time and reacts to skips, queued songs, and your play history to keep things feeling tailored and fresh.
-- Browse your library with Finload's functional but incredibly elegant UI.
+- Browse your library with a functional but incredibly elegant UI.
 
 ### How it Works
-Finload analyzes your music directly using DSP to extract acoustic similarites between songs. It combines this with genre tags and your listening history to curate the perfect collection of songs. Finload even takes into account how you interact with songs day-to-day to match your tastes.
+Compass analyzes your music directly using DSP to extract acoustic similarities between songs. It combines this with genre tags and your listening history to curate the perfect collection of songs. Compass even takes into account how you interact with songs day-to-day to match your tastes.
 
-**Finload optionally connects to MusicBrainz, Last.fm, and TheAudioDB to better learn your library. Audio analysis is entirely local.**
+**Compass optionally connects to MusicBrainz, Last.fm, and TheAudioDB to better learn your library. Audio analysis is entirely local.**
 
 ## Features
 
-- Connect to Jellyfin
-- Listen to local audio (MP3, FLAC, M4A, AAC, ALAC, OGG, OPUS, WAV, anything MPV supports.)
+- Listen to local audio (MP3, FLAC, M4A, AAC, ALAC, OGG, OPUS, WAV, anything MPV supports)
+- Connect to Jellyfin to listen to music not on your device
 - Responsive Homepage tailored to your library
 - Library view (grid and list)
 - Detail pages for albums, artists, playlists, and genres
@@ -55,34 +53,46 @@ Finload analyzes your music directly using DSP to extract acoustic similarites b
 
 ## AI Usage
 
-Agentic AI tools have historically been used in Finload's development. I have stopped using these tools entirely, however, AI-generated code still exists in Finload. I have been continually refactoring parts of the app over time to remove AI code, especially where it creates issues or makes maintenance harder. Logos, UI design, etc. were all human-generated from the start, but some frontend functions may still contain AI-generated code.
+Agentic AI tools have historically been used during development. I have stopped using these tools entirely, however, AI-generated code still exists in Compass. I have been continually refactoring parts of the app over time to remove AI code, especially where it creates issues or makes maintenance harder. Logos, UI design, etc. were all human-generated from the start, but some frontend functions may still contain AI-generated code.
 
 ## Install
 
-Download finload from the [releases page](https://github.com/asavage7/finload/releases). Linux (x64) and Windows (x64) are supported; Linux ARM support is planned.
+Download Compass from the [releases page](https://github.com/asavage7/finload/releases). Linux (x64) and Windows (x64) are supported; Linux ARM support is planned.
 
 **Debian / Ubuntu**:
 
 ```bash
-sudo apt install ./finload_<version>_amd64.deb
+sudo apt install ./compass-music_<version>_amd64.deb
 ```
 
 **Fedora / openSUSE:**
 
 ```bash
-sudo dnf install ./finload-<version>-1.x86_64.rpm
+sudo dnf install ./compass-music_<version>-1.x86_64.rpm
 ```
 
 **Appimage:**
 
 ```bash
-chmod +x finload_<version>_amd64.AppImage
-./finload_<version>_amd64.AppImage
+chmod +x compass-music_<version>_amd64.AppImage
+./compass-music_<version>_amd64.AppImage
 ```
 
 **Windows:**
 
-Run `finload_<version>_x64-setup.exe`. mpv is bundled in, so there's nothing extra to install.
+Run `Compass Music_<version>_x64-setup.exe`. MPV is bundled in, so there's nothing extra to install.
+
+### Finload migration
+
+The first Compass Music launch automatically adopts an existing Finload data directory when the Compass directory does not exist yet.
+This preserves all existing user data. Close Finload before launching Compass Music so SQLite is not in use.
+
+| Platform | Old Finload data | New Compass Music data |
+| --- | --- | --- |
+| Windows | `%LOCALAPPDATA%\\finload\\finload` | `%LOCALAPPDATA%\\Compass Music` |
+| Linux | `$XDG_DATA_HOME/finload` (normally `~/.local/share/finload`) | `$XDG_DATA_HOME/Compass Music` (normally `~/.local/share/Compass Music`) |
+
+The image cache is regenerated in the new cache directory. Install Compass Music, launch it once, verify the library and settings, then uninstall the old Finload package.
 
 Initial sync, enrichment, and audio processing can take a while on large libraries. The app is still fully functional during this time, but recommendations will improve as more songs are analyzed.
 
@@ -130,9 +140,9 @@ On first launch, the app will take you through an onboarding process. After this
 npm run build:linux
 
 # Or one target at a time
-npm run build:tauri:deb
-npm run build:tauri:rpm
-npm run build:tauri:appimage
+npm run build:deb
+npm run build:rpm
+npm run build:appimage
 
 # Completed builds can be found at src-tauri/target/release/bundle/
 ```
