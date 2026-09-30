@@ -75,12 +75,12 @@ sudo dnf install ./compass-music_<version>-1.x86_64.rpm
 
 ```bash
 chmod +x compass-music_<version>_amd64.AppImage
-./compass_music-<version>_amd64.AppImage
+./compass-music_<version>_amd64.AppImage
 ```
 
 **Windows:**
 
-Run `compass-music_<version>_x64-setup.exe`. MPV is bundled in, so there's nothing extra to install.
+Run `Compass Music_<version>_x64-setup.exe`. MPV is bundled in, so there's nothing extra to install.
 
 ### Finload migration
 
@@ -89,8 +89,8 @@ This preserves all existing user data. Close Finload before launching Compass Mu
 
 | Platform | Old Finload data | New Compass Music data |
 | --- | --- | --- |
-| Windows | `%LOCALAPPDATA%\\finload\\finload` | `%LOCALAPPDATA%\\compass-music` |
-| Linux | `$XDG_DATA_HOME/finload` (normally `~/.local/share/finload`) | `$XDG_DATA_HOME/compass-music` (normally `~/.local/share/compass-music`) |
+| Windows | `%LOCALAPPDATA%\\finload\\finload` | `%LOCALAPPDATA%\\Compass Music` |
+| Linux | `$XDG_DATA_HOME/finload` (normally `~/.local/share/finload`) | `$XDG_DATA_HOME/Compass Music` (normally `~/.local/share/Compass Music`) |
 
 The image cache is regenerated in the new cache directory. Install Compass Music, launch it once, verify the library and settings, then uninstall the old Finload package.
 
