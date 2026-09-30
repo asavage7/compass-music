@@ -52,7 +52,7 @@
         <slot name="cover" />
       </div>
     {:else if id}
-      <div class="w-32 md:w-48 lg:w-56">
+      <div class="w-[80vw] max-w-[320px] md:w-48 lg:w-56">
         <CoverImage
           src={getImageUrl(id, 240, typeLabel)}
           alt="Image of {title}"

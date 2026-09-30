@@ -23,10 +23,19 @@
   let accentColors: string[] = ["rgba(255,255,255,0.1)", "#4654ad", "#000000"];
   let hovered = false;
   let menuOpen = false;
+  let cardElement: HTMLAnchorElement;
+  let cardWidth = 0;
   $: showOverlay = hovered || menuOpen;
 
   onMount(async () => {
     if (type !== "artist") await getAccentColor();
+
+    const resizeObserver = new ResizeObserver(([entry]) => {
+      cardWidth = entry.contentRect.width;
+    });
+    resizeObserver.observe(cardElement);
+
+    return () => resizeObserver.disconnect();
   });
 
   async function getAccentColor() {
@@ -53,7 +62,7 @@
     <div
       class="absolute bottom-2 w-full pointer-events-auto flex items-center justify-between px-2"
     >
-      {#if type === "album"}
+      {#if type === "album" && cardWidth >= 180}
         <Rating
           {id}
           itemType="album"
@@ -81,6 +90,7 @@
 {/snippet}
 
 <a
+  bind:this={cardElement}
   href={getItemHref(type, id)}
   on:mouseenter|preventDefault|stopPropagation={() => (hovered = true)}
   on:mouseleave|preventDefault|stopPropagation={() => (hovered = false)}

@@ -7,7 +7,7 @@
     <div slot="content" class="w-full h-full overflow-y-auto pb-28">
         <div class=" px-4 md:px-8 pt-10 max-w-[var(--10xl)] mx-auto">
             <h1 class="text-3xl font-bold">Extras</h1>
-            <p>Fun games or experiments with features of Finload.</p>
+            <p>Fun games or experiments with features of Compass.</p>
             <div
                 class="grid grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-4 mt-6"
             >

@@ -140,8 +140,8 @@
     class="w-full h-full bg-zinc-900 flex flex-col items-center justify-center p-4"
 >
     <div class="text-3xl font-bold text-white/80 flex items-center mb-8 flex gap-2">
-        <img src="/favicon.png" alt="Finload Logo" class="w-12 h-12" /><span
-            >Welcome to Finload</span
+        <img src="/favicon.png" alt="Compass Logo" class="w-12 h-12" /><span
+            >Welcome to Compass Music</span
         >
     </div>
     <div
@@ -240,7 +240,7 @@
             </div>
             <div class="flex justify-end p-3 gap-4 align-center items-center border-t border-white/10">
                 <span class="flex-1 pl-2 text-sm truncate text-white/50"
-                    >Finload will watch this folder for your music.</span
+                    >Compass will watch this folder for your music.</span
                 >
                 <IconButton
                     text

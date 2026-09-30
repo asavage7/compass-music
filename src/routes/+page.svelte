@@ -109,7 +109,7 @@
       <div class=" px-4 md:px-8 pt-10 max-w-[var(--10xl)] mx-auto">
         {#if heroAlbum}
           <div
-            class="relative flex flex-col md:flex-row md:items-end gap-6 mb-10 p-4 shadow-xl border border-white/10 rounded-xl overflow-hidden"
+            class="relative flex md:flex-row md:items-end gap-6 mb-10 p-4 shadow-xl border border-white/10 rounded-xl overflow-hidden"
             style={`background-image: linear-gradient(to bottom left, ${heroAccentColors[0]}60, ${heroAccentColors[2]} 80%) `}
           >
             <div class="absolute inset-0 opacity-10 pointer-events-none">
@@ -154,20 +154,20 @@
                     <span>Play</span>
                   </IconButton>
                   <IconButton
-                    text
+                    md:text
                     white
                     on:click={() => playAlbum(heroAlbum.id, true)}
                   >
                     <IconArrowsShuffle size={16} />
-                    <span>Shuffle</span>
+                    <span class="hidden md:inline">Shuffle</span>
                   </IconButton>
                   <IconButton
-                    text
+                    md:text
                     white
                     on:click={() => startRadio(heroAlbum.id, "album")}
                   >
                     <IconInfinity size={16} />
-                    <span>Start Radio</span>
+                    <span class="hidden md:inline">Start Radio</span>
                   </IconButton>
                 </div>
               {/key}

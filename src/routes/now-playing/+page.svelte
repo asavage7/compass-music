@@ -38,10 +38,10 @@
         fallbackText={$playerState.current_track?.title || "No Track Playing"}
         class="block w-full max-w-[min(calc(70vh-200px),100%)] aspect-square flex-none rounded-2xl shadow-2xl border border-white/10 bg-zinc-700 mb-8"
       />
-      <div class="truncate text-3xl font-bold">
+      <div class="truncate w-full text-3xl font-bold">
         {$playerState.current_track?.title || "No Track Playing"}
       </div>
-      <div class="truncate text-xl text-zinc-400 mb-4">
+      <div class="truncate w-full text-xl text-zinc-400 mb-4">
         <a
           href={`/artist/${$playerState.current_track?.artist_id}`}
           class="hover:text-white hover:underline"

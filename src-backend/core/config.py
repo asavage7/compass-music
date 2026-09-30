@@ -8,7 +8,7 @@ from platformdirs import user_data_dir
 from dotenv import load_dotenv
 
 # User agent identifiers. Version is automatically set from scripts/set-version.mjs
-APP_NAME = "Finload"
+APP_NAME = "Compass Music"
 APP_VERSION = "0.2.1"
 USER_AGENT = f"{APP_NAME.lower()}/{APP_VERSION}"
 
