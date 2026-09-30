@@ -56,7 +56,7 @@ jobs:
       - name: Import the app
         working-directory: src-backend
         env:
-          FINLOAD_DATA_DIR: ${{ runner.temp }}/finload-data
+          COMPASS_DATA_DIR: ${{ runner.temp }}/compass-data
         run: python -c "import main; assert main.app is not None; print('app imported OK')"
 
   rust:

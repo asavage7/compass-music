@@ -26,7 +26,7 @@ from platformdirs import user_cache_dir
 
 def get_cache_dir() -> str:
     """Gets the image cache directory."""
-    cache_dir = user_cache_dir("finload")
+    cache_dir = user_cache_dir("compass-music", appauthor=False)
     os.makedirs(cache_dir, exist_ok=True)
     return cache_dir
 
@@ -58,7 +58,7 @@ def resize_and_save_jpeg(data: bytes, dest_path: str, max_width: int = 0, qualit
         img = img.convert("RGB")
         if max_width and img.width > max_width:
             ratio = max_width / img.width
-            img = img.resize((max_width, max(1, round(img.height * ratio))), Image.LANCZOS)
+            img = img.resize((max_width, max(1, round(img.height * ratio))), Image.Resampling.LANCZOS)
         buf = io.BytesIO()
         img.save(buf, "JPEG", quality=quality)
     atomic_write_bytes(buf.getvalue(), dest_path)

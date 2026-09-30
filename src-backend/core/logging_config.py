@@ -5,7 +5,7 @@ from logging.handlers import RotatingFileHandler
 
 from core.config import get_data_dir
 
-LOG_FILENAME = "finload.log"
+LOG_FILENAME = "compass-music.log"
 
 _MAX_BYTES = 1_000_000 # 1 MB
 _BACKUP_COUNT = 3

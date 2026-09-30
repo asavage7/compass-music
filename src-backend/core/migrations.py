@@ -88,7 +88,7 @@ def run_migrations(db, current_version: int):
         raise UnsupportedSchemaError(
             f"This database is at schema version {current_version}, older than the "
             f"oldest supported version ({BASELINE_VERSION}). It was created by a "
-            f"pre-release build. Delete the database file and let Finload re-sync."
+            f"pre-release build. Delete the database file and let Compass Music re-sync."
         )
     for offset, migrate_fn in enumerate(_MIGRATIONS):
         if current_version < BASELINE_VERSION + 1 + offset:

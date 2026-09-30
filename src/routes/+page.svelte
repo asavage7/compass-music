@@ -154,7 +154,8 @@
                     <span>Play</span>
                   </IconButton>
                   <IconButton
-                    md:text
+                    md
+                    text
                     white
                     on:click={() => playAlbum(heroAlbum.id, true)}
                   >
@@ -162,7 +163,8 @@
                     <span class="hidden md:inline">Shuffle</span>
                   </IconButton>
                   <IconButton
-                    md:text
+                    md
+                    text
                     white
                     on:click={() => startRadio(heroAlbum.id, "album")}
                   >

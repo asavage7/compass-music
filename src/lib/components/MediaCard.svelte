@@ -27,8 +27,8 @@
   let cardWidth = 0;
   $: showOverlay = hovered || menuOpen;
 
-  onMount(async () => {
-    if (type !== "artist") await getAccentColor();
+  onMount(() => {
+    if (type !== "artist") void getAccentColor();
 
     const resizeObserver = new ResizeObserver(([entry]) => {
       cardWidth = entry.contentRect.width;

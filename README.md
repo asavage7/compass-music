@@ -62,25 +62,37 @@ Download Compass from the [releases page](https://github.com/asavage7/finload/re
 **Debian / Ubuntu**:
 
 ```bash
-sudo apt install ./compass_music-<version>_amd64.deb
+sudo apt install ./compass-music_<version>_amd64.deb
 ```
 
 **Fedora / openSUSE:**
 
 ```bash
-sudo dnf install ./compass_music-<version>-1.x86_64.rpm
+sudo dnf install ./compass-music_<version>-1.x86_64.rpm
 ```
 
 **Appimage:**
 
 ```bash
-chmod +x compass_music-<version>_amd64.AppImage
+chmod +x compass-music_<version>_amd64.AppImage
 ./compass_music-<version>_amd64.AppImage
 ```
 
 **Windows:**
 
-Run `compass_music-<version>_x64-setup.exe`. MPV is bundled in, so there's nothing extra to install.
+Run `compass-music_<version>_x64-setup.exe`. MPV is bundled in, so there's nothing extra to install.
+
+### Finload migration
+
+The first Compass Music launch automatically adopts an existing Finload data directory when the Compass directory does not exist yet.
+This preserves all existing user data. Close Finload before launching Compass Music so SQLite is not in use.
+
+| Platform | Old Finload data | New Compass Music data |
+| --- | --- | --- |
+| Windows | `%LOCALAPPDATA%\\finload\\finload` | `%LOCALAPPDATA%\\compass-music` |
+| Linux | `$XDG_DATA_HOME/finload` (normally `~/.local/share/finload`) | `$XDG_DATA_HOME/compass-music` (normally `~/.local/share/compass-music`) |
+
+The image cache is regenerated in the new cache directory. Install Compass Music, launch it once, verify the library and settings, then uninstall the old Finload package.
 
 Initial sync, enrichment, and audio processing can take a while on large libraries. The app is still fully functional during this time, but recommendations will improve as more songs are analyzed.
 
@@ -128,9 +140,9 @@ On first launch, the app will take you through an onboarding process. After this
 npm run build:linux
 
 # Or one target at a time
-npm run build:tauri:deb
-npm run build:tauri:rpm
-npm run build:tauri:appimage
+npm run build:deb
+npm run build:rpm
+npm run build:appimage
 
 # Completed builds can be found at src-tauri/target/release/bundle/
 ```

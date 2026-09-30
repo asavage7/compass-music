@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "finload",
+  "productName": "Compass Music",
   "version": "../package.json",
-  "identifier": "com.asavage7.finload",
+  "identifier": "com.asavage7.compass-music",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "finload",
+        "title": "Compass Music",
         "width": 800,
         "height": 600,
         "additionalBrowserArgs": "--enable-features=OverlayScrollbar"
@@ -32,7 +32,7 @@
     "licenseFile": "../LICENSE",
     "category": "Music",
     "shortDescription": "A Jellyfin music player for your personal library.",
-    "longDescription": "Finload is a desktop music player for Jellyfin and local music libraries, aiming for a Spotify-like experience over your own collection: auto-generated recommendations, radio from any album, artist, track or playlist, gapless playback, synced lyrics, playlists and ratings.",
+    "longDescription": "Compass Music is a desktop music player for Jellyfin and local music libraries, aiming for a Spotify-like experience over your own collection: auto-generated recommendations, radio from any album, artist, track or playlist, gapless playback, synced lyrics, playlists and ratings.",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",

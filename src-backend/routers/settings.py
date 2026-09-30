@@ -76,7 +76,7 @@ def check_update_available(force: bool = False):
         "https://api.github.com/repos/asavage7/finload/releases/latest",
         headers={
             "Accept": "application/vnd.github+json",
-            "User-Agent": "finload",
+            "User-Agent": "compass-music",
         },
     )
     try:
