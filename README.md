@@ -1,12 +1,12 @@
 <img src="docs/banner.png" alt="Compass music banner, consisting of a circular compass with an audio waveform in the background, app name in large text, and below the name a tagline: Re-discover your personal taste." height="83"><br/>
 
-[![CI](https://github.com/asavage7/finload/actions/workflows/ci.yml/badge.svg)](https://github.com/asavage7/finload/actions/workflows/ci.yml)
+[![CI](https://github.com/asavage7/compass-music/actions/workflows/ci.yml/badge.svg)](https://github.com/asavage7/compass-music/actions/workflows/ci.yml)
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
 [![GitHub Sponsors](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/asavage7)
 
 Compass Music (previously Finload) is a unique self-hosted music client, with a custom discovery algorithm built to let you re-live your library.
 
-**The app is currently in beta. Give it a shot! If you run into problems, feel free to [open an issue](https://github.com/asavage7/finload/issues).**
+**The app is currently in beta. Give it a shot! If you run into problems, feel free to [open an issue](https://github.com/asavage7/compass-music/issues).**
 
 Current known issues can be found in [ISSUES.md](ISSUES.md).
 
@@ -57,7 +57,7 @@ Agentic AI tools have historically been used during development. I have stopped 
 
 ## Install
 
-Download Compass from the [releases page](https://github.com/asavage7/finload/releases). Linux (x64) and Windows (x64) are supported; Linux ARM support is planned.
+Download Compass from the [releases page](https://github.com/asavage7/compass-music/releases). Linux (x64) and Windows (x64) are supported; Linux ARM support is planned.
 
 **Debian / Ubuntu**:
 

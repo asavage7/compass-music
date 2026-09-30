@@ -1,15 +1,15 @@
 {
   "name": "compass-music",
   "version": "0.2.1",
-  "description": "A Jellyfin music player with a Spotify-like experience for your personal library.",
+  "description": "A next-gen music player with a stunning UI and custom discovery algorithm that reacts to your tastes in real time so you can rediscover your own library.",
   "type": "module",
-  "homepage": "https://github.com/asavage7/finload",
+  "homepage": "https://github.com/asavage7/compass-music",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/asavage7/finload.git"
+    "url": "git+https://github.com/asavage7/compass-music.git"
   },
   "bugs": {
-    "url": "https://github.com/asavage7/finload/issues"
+    "url": "https://github.com/asavage7/compass-music/issues"
   },
   "scripts": {
     "dev": "npm run dev:all",

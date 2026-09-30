@@ -49,7 +49,7 @@
     const navItems: NavItem[] = [
         { label: "Home", href: "/", icon: IconHome, activeIcon: IconHomeFilled },
         { label: "Library", href: "/library", icon: IconLibrary, activeIcon: IconLibraryFilled },
-        { label: "Support Compass", href: "https://github.com/asavage7/finload", icon: IconHeart, activeIcon: IconHeartFilled, bottom: true, external: true },
+        { label: "Support Compass", href: "https://github.com/asavage7/compass-music", icon: IconHeart, activeIcon: IconHeartFilled, bottom: true, external: true },
         { label: "Settings", href: "/settings", icon: IconSettings, activeIcon: IconSettingsFilled },
     ];
 

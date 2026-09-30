@@ -5,7 +5,7 @@ description = "Compass Music desktop shell"
 authors = ["Alex Savage", "Compass Music contributors"]
 edition = "2021"
 license = "GPL-3.0-only"
-repository = "https://github.com/asavage7/finload"
+repository = "https://github.com/asavage7/compass-music"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

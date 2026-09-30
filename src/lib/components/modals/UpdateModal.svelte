@@ -109,7 +109,7 @@
         <div class="flex-1"></div>
         <button
             onclick={() =>
-                openUrl("https://github.com/asavage7/finload/releases")}
+                openUrl("https://github.com/asavage7/compass-music/releases")}
             class="px-4 py-2 rounded-full text-sm font-semibold border transition bg-blue-500 hover:bg-blue-400 text-white border-white/10"
         >
             Go to Release Page

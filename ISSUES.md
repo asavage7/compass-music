@@ -1,6 +1,6 @@
 # Known Issues
 If an issue is shown with ~~strikethrough~~, the issue is fixed but a release hasn't been published yet.
-Please submit issues not on this list to [the issues page](https://github.com/asavage7/finload/issues).
+Please submit issues not on this list to [the issues page](https://github.com/asavage7/compass-music/issues).
 
 ### Library/Browsing
 - ~~Sync does a long search before adding any tracks, makes it seem like the app is frozeon on large libraries.~~ (Still an initial waiting period, but now more accurately shows added tracks as they happen.)
